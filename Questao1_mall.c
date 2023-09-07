@@ -11,13 +11,13 @@ typedef struct {
 void cadastro(conta *contaPtr, int quantidadeContas, conta Contas[]) {//func para cadastrar contas
 
     int loop = 1;
-    int numeroConta = 0;
+    int numeroConta = 0, voltar = 0;
     while (loop != 0){
-        voltar:
 
         printf("Digite o numero da conta: ");
         scanf("%d", &numeroConta);
-
+        voltar = 0;
+        
         for (int i = 0; i < quantidadeContas; ++i) {
             if (numeroConta == Contas[i].numero){//bloquear duas contas com numeros iguais
                 printf("\n|-----------------------------------|\n");
@@ -25,10 +25,14 @@ void cadastro(conta *contaPtr, int quantidadeContas, conta Contas[]) {//func par
                 printf("|-------------------------------------|\n");
                 system("pause");
                 system("cls");
-                goto voltar;
+                voltar = 1;
             }
         }
-        loop = 0;
+        
+        if(voltar == 1)
+            loop = 1;
+        else
+            loop = 0;
     }
 
     (*contaPtr).numero = numeroConta;
